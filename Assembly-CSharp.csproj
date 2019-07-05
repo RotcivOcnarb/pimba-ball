@@ -60,8 +60,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\CoinCounter.cs" />
+    <Compile Include="Assets\FirebaseShopItemPopulator.cs" />
     <Compile Include="Assets\Scripts\ButtonFastForward.cs" />
+    <Compile Include="Assets\Scripts\CoinCounter.cs" />
     <Compile Include="Assets\Scripts\CoinEffect.cs" />
     <Compile Include="Assets\Scripts\GameOverButton.cs" />
     <Compile Include="Assets\Scripts\LifeBar.cs" />
@@ -76,6 +77,15 @@
     <Compile Include="Assets\Scripts\SaveGame\SaveGameSystem.cs" />
     <Compile Include="Assets\Scripts\TouchDetector.cs" />
     <Compile Include="Assets\Settings\GameManager.cs" />
+    <Compile Include="Assets\ShopItem.cs" />
+    <Compile Include="Assets\ShopItemList.cs" />
+    <Compile Include="Assets\ShopItemListUI.cs" />
+    <Compile Include="Assets\ShopItemUI.cs" />
+    <Compile Include="Assets\ShopStructure.cs" />
+    <None Include="Assets\Firebase\m2repository\com\google\firebase\firebase-storage-unity\maven-metadata.xml" />
+    <None Include="Assets\Firebase\m2repository\com\google\firebase\firebase-app-unity\maven-metadata.xml" />
+    <None Include="Assets\Firebase\m2repository\com\google\firebase\firebase-database-unity\maven-metadata.xml" />
+    <None Include="Assets\Firebase\m2repository\com\google\firebase\firebase-auth-unity\maven-metadata.xml" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/victor.branco/Android Pimba/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
@@ -297,6 +307,36 @@
     </Reference>
     <Reference Include="Unity.Analytics.Tracker">
       <HintPath>C:/Users/victor.branco/Android Pimba/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
+    </Reference>
+    <Reference Include="Firebase.App">
+      <HintPath>C:/Users/victor.branco/Android Pimba/Assets/Firebase/Plugins/Firebase.App.dll</HintPath>
+    </Reference>
+    <Reference Include="Firebase.Database">
+      <HintPath>C:/Users/victor.branco/Android Pimba/Assets/Firebase/Plugins/Mono/Firebase.Database.dll</HintPath>
+    </Reference>
+    <Reference Include="Firebase.Platform">
+      <HintPath>C:/Users/victor.branco/Android Pimba/Assets/Firebase/Plugins/Firebase.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Tasks">
+      <HintPath>C:/Users/victor.branco/Android Pimba/Assets/Parse/Plugins/dotNet45/Unity.Tasks.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Sharpen">
+      <HintPath>C:/Users/victor.branco/Android Pimba/Assets/Firebase/Plugins/Google.Sharpen.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.MiniJson">
+      <HintPath>C:/Users/victor.branco/Android Pimba/Assets/Firebase/Plugins/Google.MiniJson.dll</HintPath>
+    </Reference>
+    <Reference Include="Firebase.Auth">
+      <HintPath>C:/Users/victor.branco/Android Pimba/Assets/Firebase/Plugins/Firebase.Auth.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Compat">
+      <HintPath>C:/Users/victor.branco/Android Pimba/Assets/Parse/Plugins/dotNet45/Unity.Compat.dll</HintPath>
+    </Reference>
+    <Reference Include="Firebase.TaskExtension">
+      <HintPath>C:/Users/victor.branco/Android Pimba/Assets/Firebase/Plugins/Firebase.TaskExtension.dll</HintPath>
+    </Reference>
+    <Reference Include="Firebase.Storage">
+      <HintPath>C:/Users/victor.branco/Android Pimba/Assets/Firebase/Plugins/Firebase.Storage.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2018.3.14f1/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>
