@@ -27,7 +27,7 @@ public class CoinCounter : MonoBehaviour
         switch (type)
         {
             case ScoreType.Coin:
-                text.text = "Coins: " + (int)GlobalVars.coins;
+                text.text = "Coins: " + (int)GlobalVars.getPlayerProfile().coins;
                 break;
             case ScoreType.Score:
                 text.text = "Score: " + (int)manager.score;

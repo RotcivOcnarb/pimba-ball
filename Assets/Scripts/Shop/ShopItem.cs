@@ -29,4 +29,29 @@ public class ShopItem
         this.limit = limit;
         this.imageURL = imageURL;
     }
+
+    public int GetCurrentCost(){
+
+        float val = initialCost;
+
+        if(GlobalVars.getPlayerProfile().upgrades.ContainsKey(id)){
+
+            int cont = GlobalVars.getPlayerProfile().upgrades[id];
+
+            for(int i = 0; i < cont; i ++){
+                if(progression == ShopItemUI.ItemProgression.PA){
+                    val += ratio;
+                }
+                else if(progression == ShopItemUI.ItemProgression.PG){
+                    val *= ratio;
+                }
+                else{
+                    return initialCost;
+                }
+            }
+
+            return (int)val;
+        }
+        return initialCost;
+    }
 }

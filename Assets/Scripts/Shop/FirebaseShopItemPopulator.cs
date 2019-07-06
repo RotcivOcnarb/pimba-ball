@@ -5,6 +5,7 @@ using Firebase;
 using Firebase.Database;
 using Firebase.Unity.Editor;
 using System;
+using UnityEngine.UI;
 
 public class FirebaseShopItemPopulator : MonoBehaviour
 {
@@ -12,20 +13,24 @@ public class FirebaseShopItemPopulator : MonoBehaviour
     public GameObject listPrefab;
     public GameObject itemPrefab;
     public GameObject content;
-
+    public GameObject coinCounter;
+    public GameObject canvas;
     bool loaded;
+
+    Text coinText;
 
     ShopStructure shop;
 
     // Start is called before the first frame update
     void Start()
     {
+        
+        coinText = coinCounter.GetComponent<Text>();
         loaded = false;
         FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://pimba-ball.firebaseio.com/");
         DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
 
         //LÊ O SHOP
-        Debug.Log("Begin Fetch");
         reference.GetValueAsync().ContinueWith((System.Threading.Tasks.Task<DataSnapshot> task) =>
         {
             if (task.IsFaulted)
@@ -34,7 +39,6 @@ public class FirebaseShopItemPopulator : MonoBehaviour
             }
             else if (task.IsCompleted)
             {
-                Debug.Log("Fetched");
                 DataSnapshot snap = task.Result;
                 Dictionary<string, object> myDict = (Dictionary<string, object>)snap.Value;
                 shop = new ShopStructure(myDict);
@@ -50,6 +54,8 @@ public class FirebaseShopItemPopulator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        coinText.text = "Coins: $" + GlobalVars.getPlayerProfile().coins;
 
         if (loaded)
         {
@@ -77,11 +83,14 @@ public class FirebaseShopItemPopulator : MonoBehaviour
 
                     ShopItemUI itemUI = go2.GetComponent<ShopItemUI>();
                     itemUI.LoadShopItem(item);
+                    itemUI.canvas = canvas;
 
                     RectTransform rect2 = go2.GetComponent<RectTransform>();
-
                     rect2.offsetMin = new Vector2(j*100, 100);
                     rect2.offsetMax = new Vector2(100 + j*100, -100);
+
+                    RectTransform listContentRect = listUI.content.GetComponent<RectTransform>();
+                    listContentRect.offsetMax = new Vector2(listContentRect.offsetMax.x + 100, 100);
 
                     j++;
                 }

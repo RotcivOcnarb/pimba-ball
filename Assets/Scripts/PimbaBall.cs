@@ -46,7 +46,7 @@ public class PimbaBall : MonoBehaviour
 
     public void Impulse(Vector2 force)
     {
-        body.AddForceAtPosition(force * 0.5f, body.position, ForceMode2D.Impulse);
+        body.AddForceAtPosition(force * 0.5f * GlobalVars.getPlayerProfile().GetImpulseUpgrade(), body.position, ForceMode2D.Impulse);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -55,7 +55,7 @@ public class PimbaBall : MonoBehaviour
         {
             CoinEffect ef = Instantiate(coinEffect);
             ef.transform.position = gameObject.transform.position;
-            GlobalVars.coins++;
+            GlobalVars.getPlayerProfile().coins += 1;
             manager.AddScore();
         }
 

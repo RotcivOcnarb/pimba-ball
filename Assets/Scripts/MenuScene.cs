@@ -2,20 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShopItemListUI : MonoBehaviour
+public class MenuScene : MonoBehaviour
 {
-    RectTransform rect;
-    public string listName;
-    public GameObject content;
     // Start is called before the first frame update
     void Start()
     {
-        rect = GetComponent<RectTransform>();
+        GlobalVars.Initialize();
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 }
