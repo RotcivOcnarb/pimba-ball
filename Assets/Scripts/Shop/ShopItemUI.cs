@@ -46,6 +46,7 @@ public class ShopItemUI : MonoBehaviour
             Sprite sprite = Sprite.Create(texture, new Rect(0.0f, 0.0f, texture.width,
             texture.height), new Vector2(0.5f, 0.5f), 100.0f);
             imageUI.sprite = sprite;
+            GlobalVars.GetShopImagesCache()[item.imageURL] = sprite;
         }
 
         priceUI = priceGO.GetComponent<Text>();
@@ -77,34 +78,34 @@ public class ShopItemUI : MonoBehaviour
 
     }
 
-    void RefreshUI()
+    public void LoadImageFromStorage()
     {
-        displayNameUI = displayGO.GetComponent<Text>();
-        
-        imageUI = spriteGO.GetComponent<Image>();
-
-        displayNameUI.text = item.displayName;
-
-
-        
         Firebase.Storage.StorageReference storageReference =
    Firebase.Storage.FirebaseStorage.DefaultInstance.GetReferenceFromUrl(item.imageURL);
         loaded = false;
 
         storageReference.GetBytesAsync(1024 * 1024).
-    ContinueWith((System.Threading.Tasks.Task<byte[]> task) =>
-    {
-        if (task.IsFaulted || task.IsCanceled)
-        {
+    ContinueWith((System.Threading.Tasks.Task<byte[]> task) => {
+        if (task.IsFaulted || task.IsCanceled) {
             Debug.Log(task.Exception.ToString());
         }
-        else
-        {
+        else {
             imageData = task.Result;
             loaded = true;
         }
     });
+    }
 
+    void RefreshUI()
+    {
+        displayNameUI = displayGO.GetComponent<Text>();
+        imageUI = spriteGO.GetComponent<Image>();
+        displayNameUI.text = item.displayName;
+
+        if (!GlobalVars.GetShopImagesCache().ContainsKey(item.imageURL))
+            LoadImageFromStorage();
+        else
+            imageUI.sprite = GlobalVars.GetShopImagesCache()[item.imageURL];
     }
 
     public void LoadShopItem(ShopItem item)

@@ -7,11 +7,7 @@ using System;
 public class ShopStructure
 {
 
-    public List<ShopItemList> lists;
-
-    public ShopStructure() {
-        lists = new List<ShopItemList>();
-    }
+    public SortedList<string, ShopItemList> lists;
 
     public int ToInt(object obj)
     {
@@ -23,17 +19,85 @@ public class ShopStructure
         return float.Parse(obj.ToString());
     }
 
-    public ShopStructure(Dictionary<string, object> data)
+    public long ToLong(object obj)
     {
-        lists = new List<ShopItemList>();
+        return long.Parse(obj.ToString());
+    }
 
-        List<object> ls = (List<object>) data["lists"];
-        for(int i = 0; i < ls.Count; i ++)
+    public ShopStructure(Dictionary<string, object> data, bool legacy)
+    {
+        lists = new SortedList<string, ShopItemList>();
+
+        if (legacy)
+            LegacyLoad(data);
+        else
+            LoadFromRTD(data);
+    }
+
+    public Dictionary<string, object> GetChildrenPath(object data, string path)
+    {
+        Dictionary<string, object> dict = (Dictionary<string, object>)data;
+
+        Dictionary<string, object> res = dict;
+        foreach (string s in path.Split('/'))
+        {
+            res = (Dictionary<string, object>)res[s];
+        }
+
+        return res;
+    }
+
+    public void LoadFromRTD(Dictionary<string, object> data)
+    {
+        //Carrega os arquivos de mídia
+        Dictionary<string, object> media = GetChildrenPath(data, "media/files");
+
+        //Carrega as listas de items da loja
+        Dictionary<string, object> itemLists = GetChildrenPath(data, "environments/production/content/itemList/en-US");
+        foreach (string key in itemLists.Keys)
+        {
+            Dictionary<string, object> listDict = (Dictionary<string, object>)itemLists[key];
+            ShopItemList list = new ShopItemList((string)listDict["listName"]);
+            string listID = ToLong(listDict["id"]) + "";
+            lists.Add(listID, list);
+        }
+
+        //Carrega os items da loja e popula nas respectivas listas de items
+        Dictionary<string, object> items = GetChildrenPath(data, "environments/production/content/items/en-US");
+        foreach (string key in items.Keys)
+        {
+            Dictionary<string, object> itemDict = (Dictionary<string, object>)items[key];
+            //Pucha a URL da imagem baseado no ID salvo (o flamelink é ruim nisso)
+
+            string imageID = ToLong(((List<object>)itemDict["imageURL"])[0]) + "";
+            string imageURL = "gs://pimba-ball.appspot.com/flamelink/media/" + (string)((Dictionary<string, object>)media[imageID])["file"];
+            string listID = ToLong(itemDict["item-list"]) + "";
+
+            ShopItem item = new ShopItem(
+                (string)itemDict["displayName"],
+                (string)itemDict["itemId"],
+                ToInt(itemDict["precoInicial"]),
+                (ShopItemUI.ItemProgression)int.Parse((string)itemDict["progression"]),
+                ToFloat(itemDict["ratio"]),
+                ToInt(itemDict["limite"]),
+                imageURL
+                );
+
+            lists[listID].addShopItem(item);
+        }
+    }
+
+    public void LegacyLoad(Dictionary<string, object> data)
+    {
+        
+
+        List<object> ls = (List<object>)data["lists"];
+        for (int i = 0; i < ls.Count; i++)
         {
             Dictionary<string, object> list = (Dictionary<string, object>)ls[i];
             ShopItemList sil = new ShopItemList((string)list["listName"]);
             List<object> items = (List<object>)list["items"];
-            for(int j = 0; j < items.Count; j++)
+            for (int j = 0; j < items.Count; j++)
             {
                 Dictionary<string, object> item = (Dictionary<string, object>)items[j];
 
@@ -57,20 +121,7 @@ public class ShopStructure
                 sil.addShopItem(si);
             }
 
-            lists.Add(sil);
+            lists.Add(sil.listName, sil);
         }
-    }
-
-    public void addShopItemList(ShopItemList list)
-    {
-        lists.Add(list);
-    }
-
-    public override string ToString()
-    {
-        string res = "\nItem list count: " + lists.Count + "\n";
-        foreach(ShopItemList l in lists)
-            res += l.ToString();
-        return res;
     }
 }

@@ -11,6 +11,7 @@ public class ShopConfirmPopup : MonoBehaviour
     public Button yesButton;
     public Image imageComponent;
 
+
     // Start is called before the first frame update
     void Start()
     {

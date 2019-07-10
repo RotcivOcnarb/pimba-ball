@@ -37,8 +37,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: 0}
-  m_SizeDelta: {x: 100, y: -200}
+  m_AnchoredPosition: {x: 75, y: -25}
+  m_SizeDelta: {x: 150, y: -150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4822994232750804526
 MonoBehaviour:
@@ -52,18 +52,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f194e347bcf79d4399c752cfb5ad1cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  displayName: 
-  id: 
-  initialCost: 0
-  progression: 0
-  ratio: 0
-  limit: 1
-  imageURL: 
-  buys: 0
+  item:
+    displayName: 
+    id: 
+    initialCost: 0
+    progression: 0
+    ratio: 0
+    limit: 0
+    imageURL: 
   displayGO: {fileID: 4396969388674257756}
   priceGO: {fileID: 7821973705368081257}
   spriteGO: {fileID: 4589234097947546438}
-  confirmPopup: {fileID: 7831588181227361220, guid: 7620dddc2fc4fd3449b647628e7244c6,
+  confirmPopup: {fileID: 2367025582553560840, guid: 12056e12206628647b5b57c46d0f43bc,
     type: 3}
   canvas: {fileID: 0}
 --- !u!114 &3152247469170849232
