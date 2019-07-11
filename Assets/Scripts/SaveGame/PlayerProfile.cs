@@ -9,10 +9,11 @@ public class PlayerProfile : SaveGame
     public string playerName = "Player";
     public int coins = 0;
     public int highScore = 0;
-    public Dictionary<string, int> upgrades;
+    public SerDictStringInt upgrades;
+    public int stage = 1;
 
     public PlayerProfile(){
-        upgrades = new Dictionary<string, int>();
+        upgrades = new SerDictStringInt();
     }
 
     public float GetImpulseUpgrade(){
@@ -23,4 +24,14 @@ public class PlayerProfile : SaveGame
         return 1;
     }
 
+    public float GetLinearDampingUpgrade(){
+        if(upgrades.ContainsKey("sabao")){
+            int cont = upgrades["sabao"];
+            return 1/(float)(cont+2);
+        }
+        return 1;
+    }
+
 }
+
+public class SerDictStringInt : SerializableDictionary<string, int>{}

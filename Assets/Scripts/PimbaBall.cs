@@ -25,7 +25,7 @@ public class PimbaBall : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        body.drag = GlobalVars.getPlayerProfile().GetLinearDampingUpgrade();
     }
 
     public void ResetPowerups()

@@ -30,6 +30,7 @@ public class GlobalVars : MonoBehaviour
 
     public static PlayerProfile getPlayerProfile(){
         if(playerProfile == null){
+            Debug.Log("Player null, initializing");
             Initialize();
         }
         return playerProfile;

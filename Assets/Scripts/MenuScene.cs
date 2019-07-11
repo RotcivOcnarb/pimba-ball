@@ -7,7 +7,7 @@ public class MenuScene : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GlobalVars.Initialize();
+        
     }
 
     // Update is called once per frame

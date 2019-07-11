@@ -39,5 +39,6 @@ public class ShopConfirmPopup : MonoBehaviour
         GlobalVars.getPlayerProfile().upgrades[item.id]++;
         Destroy(gameObject);
         //Also saves game
+        GlobalVars.SaveGame();
     }
 }

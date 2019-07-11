@@ -8,73 +8,14 @@ public class GameManager : MonoBehaviour
     public PimbaBall pimbaBall;
     public ObstacleBall obstaclePrefab;
     public Powerup[] powerups;
-    int level = 1;
 
     //Manager
     public ButtonFastForward button;
     bool obstacleSpawned = true;
     public int score;
+    public int level = 0;
 
-    GameObject top;
-    GameObject bottom;
-    GameObject left;
-    GameObject right;
-    float wallThickness = 5;
     Rigidbody2D body;
-
-    void Awake()
-    {
-        top = new GameObject("Top");
-        bottom = new GameObject("Bottom");
-        left = new GameObject("Left");
-        right = new GameObject("Right");
-    }
-
-    void CreateScreenColliders()
-    {
-        body = pimbaBall.GetComponent<Rigidbody2D>();
-        Vector3 bottomLeftScreenPoint = Camera.main.ScreenToWorldPoint(new Vector3(0f, 0f, 0f));
-        Vector3 topRightScreenPoint = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0f));
-
-        //// Create top collider
-        BoxCollider2D collider = top.AddComponent<BoxCollider2D>();
-        collider.size = new Vector3(Mathf.Abs(bottomLeftScreenPoint.x - topRightScreenPoint.x) + wallThickness * 2, wallThickness, 0f);
-        collider.offset = new Vector2(collider.size.x / 2f - wallThickness, collider.size.y / 2f);
-        collider.sharedMaterial = body.sharedMaterial;
-
-        top.transform.position = new Vector3((bottomLeftScreenPoint.x - topRightScreenPoint.x) / 2f, topRightScreenPoint.y, 0f);
-
-
-        // Create bottom collider
-        collider = bottom.AddComponent<BoxCollider2D>();
-        collider.size = new Vector3(Mathf.Abs(bottomLeftScreenPoint.x - topRightScreenPoint.x) + wallThickness * 2, wallThickness, 0f);
-        collider.offset = new Vector2(collider.size.x / 2f - wallThickness, collider.size.y / 2f);
-        collider.sharedMaterial = body.sharedMaterial;
-
-        //** Bottom needs to account for collider size
-        bottom.transform.position = new Vector3((bottomLeftScreenPoint.x - topRightScreenPoint.x) / 2f, bottomLeftScreenPoint.y - collider.size.y, 0f);
-
-
-        // Create left collider
-        collider = left.AddComponent<BoxCollider2D>();
-        collider.size = new Vector3(wallThickness, Mathf.Abs(topRightScreenPoint.y - bottomLeftScreenPoint.y) + wallThickness * 2, 0f);
-        collider.offset = new Vector2(collider.size.x / 2f, collider.size.y / 2f - wallThickness);
-        collider.sharedMaterial = body.sharedMaterial;
-
-        //** Left needs to account for collider size
-        left.transform.position = new Vector3(((bottomLeftScreenPoint.x - topRightScreenPoint.x) / 2f) - collider.size.x, bottomLeftScreenPoint.y, 0f);
-
-
-        // Create right collider
-        collider = right.AddComponent<BoxCollider2D>();
-        collider.size = new Vector3(wallThickness, Mathf.Abs(topRightScreenPoint.y - bottomLeftScreenPoint.y) + wallThickness * 2, 0f);
-        collider.offset = new Vector2(collider.size.x / 2f, collider.size.y / 2f - wallThickness);
-        collider.sharedMaterial = body.sharedMaterial;
-
-        right.transform.position = new Vector3(topRightScreenPoint.x, bottomLeftScreenPoint.y, 0f);
-
-
-    }
 
     public void TouchEnded(Vector2 force)
     {
@@ -86,9 +27,8 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        level = 1;
         score = 0;
-        CreateScreenColliders();
+        body = pimbaBall.GetComponent<Rigidbody2D>();
     }
 
     public void AddScore()
@@ -110,20 +50,19 @@ public class GameManager : MonoBehaviour
             ObstacleBall[] balls = FindObjectsOfType<ObstacleBall>();
 
             foreach (ObstacleBall ball in balls)
-            {
                 ball.Persist();
-            }
 
         }
     }
     
     public void SpawnEnemies()
     {
-        int quantity = Mathf.Max(Random.Range(level/3 - 1, level/3 + 2), 1);
+        int lv = level + GlobalVars.getPlayerProfile().stage;
+        int quantity = Mathf.Max(Random.Range(lv/3 - 1, lv/3 + 2), 1);
 
         for(int i = 0; i < quantity; i++)
         {
-            int hits = Mathf.Max(Random.Range(level/3 - 1, level/3 + 2), 1);
+            int hits = Mathf.Max(Random.Range(lv/3 - 1, lv/3 + 2), 1);
 
             Vector3 sMin = Camera.main.ScreenToWorldPoint(new Vector3(0f, 0f, 0f));
             Vector3 sMax = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0f));
@@ -157,5 +96,10 @@ public class GameManager : MonoBehaviour
         }
 
         level++;
+
+        if(level >= 10){
+            level = 0;
+            GlobalVars.getPlayerProfile().stage++;
+        }
     }
 }
