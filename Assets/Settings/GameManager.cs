@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -8,7 +9,8 @@ public class GameManager : MonoBehaviour
     public PimbaBall pimbaBall;
     public ObstacleBall obstaclePrefab;
     public Powerup[] powerups;
-
+    public RectTransform playArea;
+    public GameObject pauseMenu;
     //Manager
     public ButtonFastForward button;
     bool obstacleSpawned = true;
@@ -54,18 +56,40 @@ public class GameManager : MonoBehaviour
 
         }
     }
-    
+    float lastTimeScale = 0;
+    public void PauseGame()
+    {
+        pauseMenu.SetActive(true);
+        lastTimeScale = Time.timeScale;
+        Time.timeScale = 0;
+    }
+
+    public void ResumeGame()
+    {
+        pauseMenu.SetActive(false);
+        Time.timeScale = lastTimeScale;
+    }
+
+    public void QuitGame()
+    {
+        pauseMenu.SetActive(false);
+        SceneManager.LoadScene(0);
+        Time.timeScale = 1;
+    }
+
     public void SpawnEnemies()
     {
-        int lv = level + GlobalVars.getPlayerProfile().stage;
+        int lv = level + (GlobalVars.getPlayerProfile().stage-1)*10;
         int quantity = Mathf.Max(Random.Range(lv/3 - 1, lv/3 + 2), 1);
 
         for(int i = 0; i < quantity; i++)
         {
             int hits = Mathf.Max(Random.Range(lv/3 - 1, lv/3 + 2), 1);
 
-            Vector3 sMin = Camera.main.ScreenToWorldPoint(new Vector3(0f, 0f, 0f));
-            Vector3 sMax = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0f));
+            Vector3[] corners = new Vector3[4];
+            playArea.GetWorldCorners(corners);
+            Vector3 sMin = corners[0];
+            Vector3 sMax = corners[2];
 
             ObstacleBall instanced = Instantiate(obstaclePrefab, new Vector3(
                     Random.Range(sMin.x, sMax.x),

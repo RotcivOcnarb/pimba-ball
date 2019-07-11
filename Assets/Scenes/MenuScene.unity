@@ -375,7 +375,7 @@ GameObject:
   - component: {fileID: 897016908}
   - component: {fileID: 897016907}
   m_Layer: 5
-  m_Name: Credits Button
+  m_Name: Options Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -440,7 +440,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 897016908}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 804700169}
+        m_MethodName: SwitchScene
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 4
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &897016908
@@ -629,7 +640,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Credits
+  m_Text: Options
 --- !u!222 &1197443954
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -651,7 +662,7 @@ GameObject:
   - component: {fileID: 1199901365}
   - component: {fileID: 1199901364}
   m_Layer: 5
-  m_Name: Options Button
+  m_Name: Shop Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

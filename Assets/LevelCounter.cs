@@ -37,7 +37,7 @@ public class LevelCounter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        valueTween += ((value+0.1f) - valueTween) / 10f;
+        valueTween += (value - valueTween) / 10f;
 
         for(int i = 0; i < 10; i ++){
             bars[i].color = offRed;

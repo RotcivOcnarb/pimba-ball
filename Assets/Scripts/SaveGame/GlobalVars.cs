@@ -15,8 +15,9 @@ public class GlobalVars : MonoBehaviour
             SaveGameSystem.SaveGame(playerProfile, "pimba_game");
         }
         else{
-            Debug.Log("Loaded saved game");
-            playerProfile = (PlayerProfile) SaveGameSystem.LoadGame("pimba_game");
+            SaveGame sg = SaveGameSystem.LoadGame("pimba_game");
+            playerProfile = sg as PlayerProfile;
+            Debug.Log("Loaded saved game: " + sg);
         }
     }
 
@@ -38,6 +39,11 @@ public class GlobalVars : MonoBehaviour
 
     public static void SaveGame(){
         SaveGameSystem.SaveGame(playerProfile, "pimba_game");
-        Debug.Log("Game Saved");
+    }
+
+    public static void DeleteSaveGame()
+    {
+        SaveGameSystem.DeleteSaveGame("pimba_game");
+        playerProfile = null;
     }
 }

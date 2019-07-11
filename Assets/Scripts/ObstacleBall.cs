@@ -71,7 +71,7 @@ public class ObstacleBall : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.gameObject.CompareTag("Player")) {
-            currentHits--;
+            currentHits -= (int)GlobalVars.getPlayerProfile().GetHitDamageMultiplier();
             animator.SetBool("Hit", true);
         }
     }

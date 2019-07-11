@@ -14,6 +14,7 @@ public static class SaveGameSystem
             try
             {
                 formatter.Serialize(stream, saveGame);
+                stream.Close();
             }
             catch (Exception)
             {
@@ -28,6 +29,7 @@ public static class SaveGameSystem
     {
         if (!DoesSaveGameExist(name))
         {
+            Debug.Log("Save with name " + name + " not found");
             return null;
         }
 
@@ -37,10 +39,14 @@ public static class SaveGameSystem
         {
             try
             {
-                return formatter.Deserialize(stream) as SaveGame;
+                stream.Position = 0;
+                SaveGame s = formatter.Deserialize(stream) as SaveGame;
+                stream.Close();
+                return s;
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                Debug.Log(e.Message);
                 return null;
             }
         }
