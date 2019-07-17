@@ -10,11 +10,11 @@ public class PlayerProfile : SaveGame
     public string playerName = "Player";
     public int coins = 0;
     public int highScore = 0;
-    public SerDictStringInt upgrades;
+    public StringIntDict upgrades;
     public int stage = 1;
 
     public PlayerProfile(){
-        upgrades = new SerDictStringInt();
+        upgrades = new StringIntDict();
     }
 
     public float GetImpulseUpgrade(){
@@ -42,20 +42,12 @@ public class PlayerProfile : SaveGame
         return 1;
     }
 
+    public override string ToString()
+    {
+        return JsonUtility.ToJson(this, true);
+    }
+
 }
 
 [Serializable]
-public class SerDictStringInt : SerializableDictionary<string, int>{
-    public SerDictStringInt() {  }
-    protected SerDictStringInt(SerializationInfo info, StreamingContext context)
-    {
-
-        try {
-            Debug.Log(info.GetInt32("faca"));
-        }
-        catch(Exception e) {
-            Debug.LogError(e);
-        }
-
-    }
-}
+public class StringIntDict : SerializableDictionary<string, int> { }

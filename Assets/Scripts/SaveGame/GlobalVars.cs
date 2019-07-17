@@ -17,7 +17,7 @@ public class GlobalVars : MonoBehaviour
         else{
             SaveGame sg = SaveGameSystem.LoadGame("pimba_game");
             playerProfile = sg as PlayerProfile;
-            Debug.Log("Loaded saved game: " + sg);
+            Debug.Log(playerProfile);
         }
     }
 
