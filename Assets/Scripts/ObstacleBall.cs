@@ -65,13 +65,17 @@ public class ObstacleBall : MonoBehaviour
         rounds++;
         if(rounds == 6)
         {
-            pimbaBall.Damage(10);
+            float dmg = 10 * GlobalVars.getPlayerProfile().GetPlayerDeffense();
+            Debug.Log("Player damage received: " + dmg);
+            pimbaBall.Damage(dmg);
         }
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.gameObject.CompareTag("Player")) {
-            currentHits -= (int)GlobalVars.getPlayerProfile().GetHitDamageMultiplier();
+            int dmg = (int)GlobalVars.getPlayerProfile().GetHitDamageMultiplier();;
+            Debug.Log("Ball collided, damage received: " + dmg);
+            currentHits -= dmg;
             animator.SetBool("Hit", true);
         }
     }

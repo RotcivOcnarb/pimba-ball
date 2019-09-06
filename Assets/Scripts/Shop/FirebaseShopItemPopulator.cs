@@ -19,8 +19,8 @@ public class FirebaseShopItemPopulator : MonoBehaviour
 
     Text coinText;
 
-    float initialListY = 300;
-    float listPeriod = 250;
+    float initialListY = 400;
+    float listPeriod = 500;
 
     // Start is called before the first frame update
     void Start()
@@ -70,11 +70,12 @@ public class FirebaseShopItemPopulator : MonoBehaviour
             listUI.listName = list.listName;
 
             RectTransform rect = go.GetComponent<RectTransform>();
-            rect.offsetMin = new Vector2(0, -initialListY - 100 - listPeriod * i);
-            rect.offsetMax = new Vector2(0, -initialListY + 100 - listPeriod * i);
+            rect.offsetMin = new Vector2(0, -initialListY - 200 - listPeriod * i);
+            rect.offsetMax = new Vector2(0, -initialListY + 200 - listPeriod * i);
 
-
+            
             int j = 0;
+            float size = 300;
             foreach (ShopItem item in list.items) {
                 GameObject go2 = Instantiate(itemPrefab);
                 go2.transform.SetParent(listUI.content.transform, false);
@@ -84,14 +85,16 @@ public class FirebaseShopItemPopulator : MonoBehaviour
                 itemUI.canvas = canvas;
 
                 RectTransform rect2 = go2.GetComponent<RectTransform>();
-                rect2.offsetMin = new Vector2(j * 150, 50);
-                rect2.offsetMax = new Vector2(150 + j * 150, -100);
+                rect2.offsetMin = new Vector2(j * size, 100);
+                rect2.offsetMax = new Vector2(size + j * size, -100);
 
                 RectTransform listContentRect = listUI.content.GetComponent<RectTransform>();
-                listContentRect.offsetMax = new Vector2(listContentRect.offsetMax.x + 100, 100);
+                listContentRect.offsetMax = new Vector2(listContentRect.offsetMax.x + size, 100);
 
                 j++;
             }
+            
+
             i++;
         }
     }

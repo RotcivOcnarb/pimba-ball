@@ -55,7 +55,11 @@ public class PimbaBall : MonoBehaviour
         {
             CoinEffect ef = Instantiate(coinEffect);
             ef.transform.position = gameObject.transform.position;
-            GlobalVars.getPlayerProfile().coins += 1;
+            int coins = GlobalVars.getPlayerProfile().GetPlayerCoinMultiplier();
+
+            ef.value = coins;
+            Debug.Log("Coins gained: " + coins);
+            GlobalVars.getPlayerProfile().coins += coins;
             manager.AddScore();
         }
 

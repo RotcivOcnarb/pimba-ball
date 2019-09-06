@@ -42,9 +42,30 @@ public class PlayerProfile : SaveGame
         return 1;
     }
 
+    public float GetPlayerDeffense(){
+        if (upgrades.ContainsKey("armadura")) {
+            int cont = upgrades["armadura"];
+            return (1 / (float)(cont+5f)) * 5f;
+        }
+        return 1;
+    
+    }
+
+    public int GetPlayerCoinMultiplier(){
+        if (upgrades.ContainsKey("barganha")) {
+            int cont = upgrades["barganha"];
+            return cont*cont + 1;
+        }
+        return 1;
+    }
+
     public override string ToString()
     {
         return JsonUtility.ToJson(this, true);
+    }
+
+    public int GetValue(string id){
+        return upgrades.ContainsKey(id) ? upgrades[id] : 0;
     }
 
 }

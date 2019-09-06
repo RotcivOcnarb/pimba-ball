@@ -18,6 +18,7 @@ public class ShopItemUI : MonoBehaviour
     public GameObject displayGO;
     public GameObject priceGO;
     public GameObject spriteGO;
+    public GameObject valueGO;
     public GameObject confirmPopup;
     public GameObject canvas;
 
@@ -51,6 +52,8 @@ public class ShopItemUI : MonoBehaviour
 
         priceUI = priceGO.GetComponent<Text>();
         priceUI.text = "$" + item.GetCurrentCost();
+
+        valueGO.GetComponent<Text>().text = GlobalVars.getPlayerProfile().GetValue(item.id) + "";
 
     }
 
