@@ -105,7 +105,6 @@ public class ObstacleBall : MonoBehaviour
 
             Damage(dmg);
 
-
             //Bomba
             Vector2 bomb = GlobalVars.getPlayerProfile().GetBombValue();
             float rnd = Random.Range(0, 1f);

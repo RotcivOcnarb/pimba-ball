@@ -64,7 +64,7 @@ public class PlayerProfile : SaveGame
 
         if (upgrades.ContainsKey("bomba")) {
             int cont = upgrades["bomba"];
-            ret.x = -1/(cont/10f + 1) + 1;
+            ret.x = Mathf.Min(cont/20f, .5f);
             ret.y = (int) (cont/2f + 1);
         }
 
@@ -75,7 +75,7 @@ public class PlayerProfile : SaveGame
         Vector2 ret = new Vector2(0, 0);
         if (upgrades.ContainsKey("chain-reaction")) {
             int cont = upgrades["chain-reaction"];
-            ret.x = -1/(cont/10f + 1) + 1;
+            ret.x = Mathf.Min(cont/20f, .5f);
             ret.y = (int) (cont/2f + 1);
         }
         return ret;

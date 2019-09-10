@@ -59,8 +59,6 @@ abf1930d8126d0b2e00e9449129a0190 UnityEngine.UI.dll:UnityEngine.EventSystems.Tou
 64e54c0cbb0177c5ea26f340efb9ff85 UnityEngine.UI.dll:UnityEngine.UI.VerticalLayoutGroup
 ad1a54103a92e03ab2e980e8ef95dff1 Assembly-CSharp.dll:.OptionsButtonClicks
 98ad81e9f689a492509f07e75b810aaa Unity.TextMeshPro.dll:TMPro.TMP_InputField
-71bb6a6b6c8f052f948db64c7dd3ca4f UnityEngine.Advertisements.dll:UnityEngine.Advertisements.CallbackExecutor
-71bb6a6b6c8f052f948db64c7dd3ca4f UnityEngine.Advertisements.dll:UnityEngine.Advertisements.Editor.Placeholder
 cf9f5cf2c3145a37ac07f00e50e460f9 UnityEngine.UI.dll:UnityEngine.UI.AspectRatioFitter
 71bb6a6b6c8f052f948db64c7dd3ca4f UnityEngine.UI.dll:UnityEngine.EventSystems.BaseInput
 5fc094978ce3e3591a7500ed380d854a UnityEngine.UI.dll:UnityEngine.UI.Button
@@ -97,6 +95,7 @@ abf1930d8126d0b2e00e9449129a0190 UnityEngine.UI.dll:UnityEngine.EventSystems.Tou
 56faa31fcfbe7c7adbec851705803d09 Assembly-CSharp.dll:.TouchDetector
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.MenuManager
 71bb6a6b6c8f052f948db64c7dd3ca4f Firebase.Platform.dll:Firebase.Platform.FirebaseMonoBehaviour
+8037b5a5c2c80155a18a2623b362806b Assembly-CSharp.dll:DigitalRuby.LightningBolt.LightningBoltScript
 f89acf741c82169fe48a608f0bf55162 Assembly-CSharp.dll:.CoinCounter
 71bb6a6b6c8f052f948db64c7dd3ca4f UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationPlayableAsset
 06f0fef534ca4c1d6064fd77a26bf722 UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationTrack
@@ -131,10 +130,10 @@ d251bf88db6c95a6b1aa0b69298da9ef UnityEngine.SpatialTracking.dll:UnityEngine.Spa
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.IntegrationDailyRewards
 bc805e644a924153619c7338a4bbd725 Assembly-CSharp.dll:.ShopItemUI
 8308fb4653d3c2f2823e0e7583c0c714 Assembly-CSharp.dll:.FirebaseShopItemPopulator
-59a61e0a4af0b15a95a7e1168189b139 Assembly-CSharp.dll:.SteelPowerup
 303ad70ce203ad874efe2965d0fbcff9 Unity.Analytics.Tracker.dll:UnityEngine.Analytics.AnalyticsEventTracker
 7fb9de8dcf73854b6b328eca1f7a6e6d Unity.Analytics.Tracker.dll:UnityEngine.Analytics.AnalyticsTracker
-007e005ce60404e511688b6c7b222d9d Assembly-CSharp.dll:.ObstacleBall
+38a082abdf36933a92ad06efe77cd1d6 Assembly-CSharp.dll:.ObstacleBall
+71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.LightningFadeOut
 94017dcc9f00fe671ea7dc427b4da011 Unity.TextMeshPro.dll:TMPro.TMP_SpriteAsset
 fe4b897565281dba67e195174b47039f Assembly-CSharp.dll:.GameCounters
 fac24dda9fe9fe9f35c0a459b10e4e5f Assembly-CSharp.dll:.GameManager
@@ -183,6 +182,7 @@ fb6a1ea36b4f6ef5948d283d93760765 UnityEngine.GoogleAudioSpatializer.dll:UnityEng
 a4f0a4f62100f1a4fb5cbe0e00dde83f Unity.TextMeshPro.dll:TMPro.TextMeshProUGUI
 5fc094978ce3e3591a7500ed380d854a Unity.Analytics.DataPrivacy.dll:UnityEngine.Analytics.DataPrivacyButton
 d251bf88db6c95a6b1aa0b69298da9ef UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
+71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.ExplosionEffect
 2ebd632ae05fd40bc80ee8489c8e6929 Assembly-CSharp.dll:.PimbaBall
 d791aa6007fa3640be1164ea75bb087d Unity.TextMeshPro.dll:TMPro.TMP_StyleSheet
 a92d1906f206bdc9b708bbc3ee7d9fc4 Assembly-CSharp.dll:NiobiumStudios.DailyRewardUI

@@ -9,6 +9,7 @@ public class MenuScene : MonoBehaviour
     {
         if (GlobalVars.shopCache == null)
             FirebaseShopItemPopulator.PopulateShopFromRTD();
+
     }
 
     // Update is called once per frame

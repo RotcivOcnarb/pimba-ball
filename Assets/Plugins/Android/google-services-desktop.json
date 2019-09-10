@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "913749490514",
+    "firebase_url": "https://pimba-ball.firebaseio.com",
+    "project_id": "pimba-ball",
+    "storage_bucket": "pimba-ball.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:913749490514:android:629405ddf44f0537",
+        "android_client_info": {
+          "package_name": "br.com.rotciv.games"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "913749490514-d3b0gc0dgeqf7jtm8mlm0ug650rckce4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFeyv6kuj0t1TPxZmHiQCYXFMR_SfxhdE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "913749490514-d3b0gc0dgeqf7jtm8mlm0ug650rckce4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

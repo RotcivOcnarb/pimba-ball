@@ -22,7 +22,9 @@ public class ShopConfirmPopup : MonoBehaviour
     void Update()
     {
         //Debug.Log("Updating popup " + (item.ratio));
-        yesButton.interactable = GlobalVars.getPlayerProfile().coins >= item.GetCurrentCost();
+        yesButton.interactable =
+        GlobalVars.getPlayerProfile().coins >= item.GetCurrentCost() &&
+        GlobalVars.getPlayerProfile().GetValue(item.id) < item.limit;
         imageComponent.sprite = image;
     }
 

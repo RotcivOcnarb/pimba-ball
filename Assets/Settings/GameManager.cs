@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-
     public PimbaBall pimbaBall;
     public ObstacleBall obstaclePrefab;
     public Powerup[] powerups;
@@ -58,6 +57,7 @@ public class GameManager : MonoBehaviour
 
         }
     }
+
     float lastTimeScale = 0;
     public void PauseGame()
     {
@@ -93,11 +93,21 @@ public class GameManager : MonoBehaviour
             Vector3 sMin = corners[0];
             Vector3 sMax = corners[2];
 
-            ObstacleBall instanced = Instantiate(obstaclePrefab, new Vector3(
+            Vector3 obsPos = new Vector3(
                     Random.Range(sMin.x, sMax.x),
                     Random.Range(sMin.y, sMax.y),
                     0
-                ), new Quaternion());
+                );
+
+            while((obsPos - pimbaBall.transform.position).magnitude < 1.5){
+                obsPos = new Vector3(
+                    Random.Range(sMin.x, sMax.x),
+                    Random.Range(sMin.y, sMax.y),
+                    0
+                );
+            }
+
+            ObstacleBall instanced = Instantiate(obstaclePrefab, obsPos, new Quaternion());
 
             instanced.manager = this;
             instanced.coinEffect = pimbaBall.coinEffect.gameObject;

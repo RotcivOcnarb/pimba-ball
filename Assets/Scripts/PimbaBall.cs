@@ -52,23 +52,6 @@ public class PimbaBall : MonoBehaviour
         body.AddForceAtPosition(force * 0.5f * GlobalVars.getPlayerProfile().GetImpulseUpgrade(), body.position, ForceMode2D.Impulse);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.collider.gameObject.CompareTag("Obstacle"))
-        {
-            /*
-            CoinEffect ef = Instantiate(coinEffect);
-            ef.transform.position = gameObject.transform.position;
-            int coins = GlobalVars.getPlayerProfile().GetPlayerCoinMultiplier();
-
-            ef.value = coins;
-            GlobalVars.getPlayerProfile().coins += coins;
-            manager.AddScore();
-            */
-        }
-
-    }
-
     public void TriggerOnObstacle(ObstacleBall obstacle)
     {
         foreach (Powerup powerup in powerups)

@@ -779,10 +779,10 @@ PlayerSettings:
   facebookXfbml: 0
   facebookFrictionlessRequests: 1
   apiCompatibilityLevel: 6
-  cloudProjectId: 4fbf2b85-cf48-40bb-8181-710bfc487642
+  cloudProjectId: 05ef1a61-6d18-4295-a0c1-2cb4f727ea2c
   framebufferDepthMemorylessMode: 0
-  projectName: Android Pimba
-  organizationId: tasmanianpooper
+  projectName: Pimba
+  organizationId: unity_hzb8xk02afacyq
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0

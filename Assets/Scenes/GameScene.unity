@@ -594,7 +594,7 @@ MonoBehaviour:
   obstaclePrefab: {fileID: 9111266309197471014, guid: 276e86651c828ce40b8820c515a7dcf1,
     type: 3}
   powerups:
-  - {fileID: 3891007005535507700, guid: 7c3555e1f4fedd6498f8bdff7d1e7855, type: 3}
+  - {fileID: 0}
   playArea: {fileID: 1858097500}
   pauseMenu: {fileID: 1689378681}
   button: {fileID: 830072056}
