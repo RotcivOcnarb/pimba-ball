@@ -322,6 +322,9 @@
  <Reference Include="Firebase.Auth">
  <HintPath>C:/Users/victor.branco/Documents/Unity Projects/pimba-ball/Assets/Firebase/Plugins/Firebase.Auth.dll</HintPath>
  </Reference>
+ <Reference Include="Firebase.Database">
+ <HintPath>C:/Users/victor.branco/Documents/Unity Projects/pimba-ball/Assets/Firebase/Plugins/Firebase.Database.dll</HintPath>
+ </Reference>
  <Reference Include="Firebase.Platform">
  <HintPath>C:/Users/victor.branco/Documents/Unity Projects/pimba-ball/Assets/Firebase/Plugins/Firebase.Platform.dll</HintPath>
  </Reference>
@@ -336,9 +339,6 @@
  </Reference>
  <Reference Include="Google.Sharpen">
  <HintPath>C:/Users/victor.branco/Documents/Unity Projects/pimba-ball/Assets/Firebase/Plugins/Google.Sharpen.dll</HintPath>
- </Reference>
- <Reference Include="Firebase.Database">
- <HintPath>C:/Users/victor.branco/Documents/Unity Projects/pimba-ball/Assets/Firebase/Plugins/Mono/Firebase.Database.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Compat">
  <HintPath>C:/Users/victor.branco/Documents/Unity Projects/pimba-ball/Assets/Parse/Plugins/dotNet45/Unity.Compat.dll</HintPath>
