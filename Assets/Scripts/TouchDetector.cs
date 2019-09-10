@@ -35,6 +35,7 @@ public class TouchDetector : MonoBehaviour
 
     void TouchEnd()
     {
+        if((startPoint - endPoint).magnitude < 0.1) return;
         //Dispara a bolinha
         touching = false;
         gameManager.TouchEnded((startPoint - endPoint));

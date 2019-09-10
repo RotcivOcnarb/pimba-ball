@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DigitalRuby.LightningBolt;
 public class ObstacleBall : MonoBehaviour
 {
     public Color color;
@@ -9,6 +10,8 @@ public class ObstacleBall : MonoBehaviour
     public int currentHits;
     int rounds = 0;
 
+    public GameObject lightningPrefab;
+
     GameObject textObject;
     TextMesh textMesh;
 
@@ -16,6 +19,10 @@ public class ObstacleBall : MonoBehaviour
     MeshRenderer meshRenderer;
 
     public PimbaBall pimbaBall;
+
+    public GameManager manager;
+    public GameObject coinEffect;
+    public GameObject explosionEffect;
 
     public float scaleAnimation;
     public float obstacleSize;
@@ -70,14 +77,83 @@ public class ObstacleBall : MonoBehaviour
             pimbaBall.Damage(dmg);
         }
     }
+
+    public void Damage(int damage){
+
+        currentHits -= damage;
+        if(animator != null){
+            animator.SetBool("Hit", true);
+        }
+
+        CoinEffect ef = Instantiate(coinEffect).GetComponent<CoinEffect>();
+        ef.transform.position = gameObject.transform.position;
+        int coins = GlobalVars.getPlayerProfile().GetPlayerCoinMultiplier();
+
+        ef.value = coins;
+        GlobalVars.getPlayerProfile().coins += coins;
+
+        if(manager != null)
+        manager.AddScore(); 
+
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.gameObject.CompareTag("Player")) {
-            int dmg = (int)GlobalVars.getPlayerProfile().GetHitDamageMultiplier();;
-            Debug.Log("Ball collided, damage received: " + dmg);
-            currentHits -= dmg;
-            animator.SetBool("Hit", true);
+            // Player deu dano na bola
+            int dmg = (int)GlobalVars.getPlayerProfile().GetHitDamageMultiplier();
+
+            Damage(dmg);
+
+
+            //Bomba
+            Vector2 bomb = GlobalVars.getPlayerProfile().GetBombValue();
+            float rnd = Random.Range(0, 1f);
+            if(rnd < bomb.x){
+                //Itera por todos os obstaculos q não são ele, e checa quais q estão perto
+                ObstacleBall[] list = Resources.FindObjectsOfTypeAll(typeof(ObstacleBall)) as ObstacleBall[];
+                foreach(ObstacleBall ob in list){
+                    if(ob == this) continue;
+                    if((ob.transform.position - transform.position).magnitude < 1.5f){
+                        ob.Damage((int)bomb.y);
+                    }
+                }
+                Instantiate(explosionEffect, transform.position, explosionEffect.transform.rotation);
+            }
+
+            ChainReaction(this);
+            
         }
+    }
+
+    public void ChainReaction(ObstacleBall obs){
+        //Reação em cadeia
+
+            for(int i = 0; i < 2; i ++){
+                Vector2 chain = GlobalVars.getPlayerProfile().GetChainReactionValue();
+                if(Random.Range(0, 1f) < chain.x){
+
+                    //Calcula o target random
+                    ObstacleBall[] list = Resources.FindObjectsOfTypeAll(typeof(ObstacleBall)) as ObstacleBall[];
+                    ObstacleBall rand_ob = list[Random.Range(0, list.Length)];
+                    while(rand_ob == obs){
+                        rand_ob = list[Random.Range(0, list.Length)];
+                    }
+
+                    //Cria o objeto de linha
+                    GameObject line = Instantiate(lightningPrefab);
+
+                    line.GetComponent<LightningFadeOut>().RecalculateLines(
+                        obs.transform.position,
+                        rand_ob.transform.position
+                    );
+
+                    //Dá dano e propaga o efeito
+                    rand_ob.Damage((int)chain.y);
+                    ChainReaction(rand_ob);
+
+                }
+            }
     }
 
     public void DisableHit()

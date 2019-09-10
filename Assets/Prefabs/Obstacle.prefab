@@ -141,7 +141,14 @@ MonoBehaviour:
   color: {r: 0.18223965, g: 0.6037736, b: 0.11107157, a: 1}
   hits: 1
   currentHits: 0
+  lightningPrefab: {fileID: 7686031024178691998, guid: b9c6acc3f42f9bf4da01d48977dd6ff7,
+    type: 3}
   pimbaBall: {fileID: 0}
+  manager: {fileID: 0}
+  coinEffect: {fileID: 8795004574872837630, guid: 54f4e5b6faaa0f949a05e883ac23e870,
+    type: 3}
+  explosionEffect: {fileID: 3851300942746615204, guid: ff2c292f205c0da4fa2782e993215d10,
+    type: 3}
   scaleAnimation: 0
   obstacleSize: 0
 --- !u!222 &9111266309197471009

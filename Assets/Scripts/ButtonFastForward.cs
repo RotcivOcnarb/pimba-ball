@@ -32,11 +32,13 @@ public class ButtonFastForward : MonoBehaviour
 
     public void FastForwadTime()
     {
-        Rigidbody2D body = pimbaBall.GetComponent<Rigidbody2D>();
-        if (body.velocity.magnitude >= 0.1)
-        {
-            Time.timeScale = 3;
-            DisableButton();
+        if(button.interactable){
+            Rigidbody2D body = pimbaBall.GetComponent<Rigidbody2D>();
+            if (body.velocity.magnitude >= 0.1)
+            {
+                Time.timeScale = 3;
+                DisableButton();
+            }
         }
     }
 }

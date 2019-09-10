@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
     {
         score = 0;
         body = pimbaBall.GetComponent<Rigidbody2D>();
+         SpawnEnemies();
     }
 
     public void AddScore()
@@ -49,6 +50,7 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 1;
             button.DisableButton();
             pimbaBall.ResetPowerups();
+            pimbaBall.ResetSpeed();
             ObstacleBall[] balls = FindObjectsOfType<ObstacleBall>();
 
             foreach (ObstacleBall ball in balls)
@@ -97,6 +99,8 @@ public class GameManager : MonoBehaviour
                     0
                 ), new Quaternion());
 
+            instanced.manager = this;
+            instanced.coinEffect = pimbaBall.coinEffect.gameObject;
             instanced.transform.localScale = new Vector3(0, 0, 0);
             instanced.hits = hits;
             instanced.color = Random.ColorHSV();

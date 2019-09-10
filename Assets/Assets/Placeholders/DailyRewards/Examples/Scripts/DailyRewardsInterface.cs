@@ -52,6 +52,7 @@ namespace NiobiumStudios
 			dailyRewards = GetComponent<DailyRewards>();
         }
 
+        [Obsolete]
         void Start()
         {
             InitializeDailyRewardsUI();

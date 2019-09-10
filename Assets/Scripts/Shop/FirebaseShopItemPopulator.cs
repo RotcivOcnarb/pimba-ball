@@ -25,6 +25,9 @@ public class FirebaseShopItemPopulator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+        loaded = false;
+
         coinText = coinCounter.GetComponent<Text>();
         if (GlobalVars.shopCache == null)
             PopulateShopFromRTD();
@@ -33,9 +36,8 @@ public class FirebaseShopItemPopulator : MonoBehaviour
         
     }
 
-    public void PopulateShopFromRTD()
+    public static void PopulateShopFromRTD()
     {
-        loaded = false;
         FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://pimba-ball.firebaseio.com/");
         DatabaseReference reference = FirebaseDatabase.DefaultInstance.GetReference("flamelink");
 
@@ -52,7 +54,6 @@ public class FirebaseShopItemPopulator : MonoBehaviour
                 Dictionary<string, object> myDict = (Dictionary<string, object>)snap.Value;
 
                 GlobalVars.shopCache = new ShopStructure(myDict, false);
-                loaded = true;
             }
         });
     }
@@ -103,10 +104,10 @@ public class FirebaseShopItemPopulator : MonoBehaviour
     void Update()
     {
         coinText.text = "Coins: $" + GlobalVars.getPlayerProfile().coins;
-        if (loaded)
+        if (!loaded && GlobalVars.shopCache != null)
         {
-            loaded = false;
             PopulateInterface();
+            loaded = true;
         }
 
     }

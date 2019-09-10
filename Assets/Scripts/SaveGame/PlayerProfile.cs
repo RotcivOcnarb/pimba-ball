@@ -59,8 +59,29 @@ public class PlayerProfile : SaveGame
         return 1;
     }
 
-    public override string ToString()
-    {
+    public Vector2 GetBombValue(){
+        Vector2 ret = new Vector2(0, 0);
+
+        if (upgrades.ContainsKey("bomba")) {
+            int cont = upgrades["bomba"];
+            ret.x = -1/(cont/10f + 1) + 1;
+            ret.y = (int) (cont/2f + 1);
+        }
+
+        return ret;
+    }
+
+    public Vector2 GetChainReactionValue(){
+        Vector2 ret = new Vector2(0, 0);
+        if (upgrades.ContainsKey("chain-reaction")) {
+            int cont = upgrades["chain-reaction"];
+            ret.x = -1/(cont/10f + 1) + 1;
+            ret.y = (int) (cont/2f + 1);
+        }
+        return ret;
+    }
+
+    public override string ToString(){
         return JsonUtility.ToJson(this, true);
     }
 

@@ -28,6 +28,10 @@ public class PimbaBall : MonoBehaviour
         body.drag = GlobalVars.getPlayerProfile().GetLinearDampingUpgrade();
     }
 
+    public void ResetSpeed(){
+        body.velocity = new Vector2(0, 0);
+    }
+
     public void ResetPowerups()
     {
         powerups.Clear();
@@ -36,7 +40,6 @@ public class PimbaBall : MonoBehaviour
     public void Damage(float damage)
     {
         life -= damage;
-
         if(life <= 0)
         {
             Destroy(this);
@@ -53,14 +56,15 @@ public class PimbaBall : MonoBehaviour
     {
         if (collision.collider.gameObject.CompareTag("Obstacle"))
         {
+            /*
             CoinEffect ef = Instantiate(coinEffect);
             ef.transform.position = gameObject.transform.position;
             int coins = GlobalVars.getPlayerProfile().GetPlayerCoinMultiplier();
 
             ef.value = coins;
-            Debug.Log("Coins gained: " + coins);
             GlobalVars.getPlayerProfile().coins += coins;
             manager.AddScore();
+            */
         }
 
     }
