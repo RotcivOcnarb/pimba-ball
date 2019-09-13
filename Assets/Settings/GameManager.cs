@@ -2,21 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public PimbaBall pimbaBall;
     public ObstacleBall obstaclePrefab;
-    
     public RectTransform playArea;
     public GameObject pauseMenu;
+    public GameObject winMenu;
     //Manager
     public ButtonFastForward button;
     bool obstacleSpawned = true;
     public int score;
     public int level = 0;
-
     Rigidbody2D body;
+
+    //Interface
+    public FillBar levelBar;
+    public ProgressBar healthBar;
+    public Text scoreText;
+    public Text stageText;
 
     public void TouchEnded(Vector2 force)
     {
@@ -41,6 +47,13 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        levelBar.percentage += ((level / 10f) * 100 - levelBar.percentage)/5f;
+        healthBar.maxValue = GlobalVars.getPlayerProfile().GetPlayerHealth();
+        healthBar.value = (int)pimbaBall.life;
+        scoreText.text = "" + score;
+        stageText.text = "Stage " + GlobalVars.getPlayerProfile().stage;
+
+
         // The ball has finished moving, next round
         if (body.velocity.magnitude < 0.1 && obstacleSpawned == false)
         {
@@ -61,6 +74,7 @@ public class GameManager : MonoBehaviour
     float lastTimeScale = 0;
     public void PauseGame()
     {
+        pauseMenu.GetComponentInChildren<DropToCenterY>().transform.position = new Vector3(0, 6.3f, 0);
         pauseMenu.SetActive(true);
         lastTimeScale = Time.timeScale;
         Time.timeScale = 0;
@@ -68,6 +82,7 @@ public class GameManager : MonoBehaviour
 
     public void ResumeGame()
     {
+        pauseMenu.GetComponentInChildren<DropToCenterY>().transform.position = new Vector3(0, 6.3f, 0);
         pauseMenu.SetActive(false);
         Time.timeScale = lastTimeScale;
     }
@@ -77,6 +92,16 @@ public class GameManager : MonoBehaviour
         pauseMenu.SetActive(false);
         SceneManager.LoadScene(0);
         Time.timeScale = 1;
+    }
+
+    public void ShowGameOverScreen(){
+        winMenu.GetComponentInChildren<DropToCenterY>().transform.position = new Vector3(0, 7f, 0);
+        winMenu.GetComponentInChildren<WinWindowScreen>().ShowScores();
+        winMenu.SetActive(true);
+        lastTimeScale = Time.timeScale;
+        Time.timeScale = 0;
+
+        
     }
 
     public void SpawnEnemies()

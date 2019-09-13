@@ -22,6 +22,6 @@ public class LifeBar : MonoBehaviour
     void Update()
     {
         lifeTween += (pimbaBall.life - lifeTween) / 5f;
-        bar.rectTransform.offsetMax = new Vector2(-initialWidth * (1-(lifeTween / pimbaBall.maxLife)), 0);
+        //bar.rectTransform.offsetMax = new Vector2(-initialWidth * (1-(lifeTween / pimbaBall.maxLife)), 0);
     }
 }

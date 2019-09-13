@@ -5,20 +5,19 @@ using UnityEngine.SceneManagement;
 public class PimbaBall : MonoBehaviour
 {
     Rigidbody2D body;
-    public float maxLife;
-    public float life;
+    public int life;
     public CoinEffect coinEffect;
     public GameManager manager;
 
     [HideInInspector]
     public ArrayList powerups;
+    bool dead = false;
 
     // Start is called before the first frame update
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
-        maxLife = 100;
-        life = maxLife;
+        life = GlobalVars.getPlayerProfile().GetPlayerHealth();
         powerups = new ArrayList();
     }
 
@@ -37,13 +36,15 @@ public class PimbaBall : MonoBehaviour
         powerups.Clear();
     }
 
-    public void Damage(float damage)
+    public void Damage()
     {
-        life -= damage;
+        life --;
         if(life <= 0)
         {
-            Destroy(this);
-            SceneManager.LoadScene(2);
+            if(!dead){
+                dead = true;
+                manager.ShowGameOverScreen();
+            }
         }
     }
 

@@ -2,8 +2,6 @@
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <LangVersion>latest</LangVersion>
-    <CscToolPath>C:\Program Files\Unity\Hub\Editor\2019.2.4f1\Editor\Data\Tools\RoslynScripts</CscToolPath>
-    <CscToolExe>unity_csc.bat</CscToolExe>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -62,7 +60,10 @@
      <Compile Include="Assets\Assets\Placeholders\DailyRewards\Scripts\DailyRewardsCore.cs" />
      <Compile Include="Assets\Assets\Placeholders\DailyRewards\Scripts\IntegrationDailyRewards.cs" />
      <Compile Include="Assets\Assets\Placeholders\DailyRewards\Scripts\Reward.cs" />
+     <Compile Include="Assets\DropToCenterY.cs" />
+     <Compile Include="Assets\FillBar.cs" />
      <Compile Include="Assets\LightningBolt\LightningBoltScript.cs" />
+     <Compile Include="Assets\ProgressBar.cs" />
      <Compile Include="Assets\Scripts\ButtonFastForward.cs" />
      <Compile Include="Assets\Scripts\CanvasColliderFiller.cs" />
      <Compile Include="Assets\Scripts\CoinCounter.cs" />
@@ -94,6 +95,7 @@
      <Compile Include="Assets\Scripts\Shop\ShopStructure.cs" />
      <Compile Include="Assets\Scripts\TouchDetector.cs" />
      <Compile Include="Assets\Settings\GameManager.cs" />
+     <Compile Include="Assets\WinWindowScreen.cs" />
      <None Include="Assets\Firebase\m2repository\com\google\firebase\firebase-storage-unity\maven-metadata.xml" />
      <None Include="Assets\Assets\Kenney\Kenney Items\Spritesheet\genericItems_spritesheet_white.xml" />
      <None Include="Assets\LightningBolt\Readme.txt" />
@@ -107,6 +109,7 @@
      <None Include="Assets\Assets\Kenney\license.txt" />
      <None Include="Assets\Assets\Kenney\Spritesheet\greySheet.xml" />
      <None Include="Assets\Assets\Kenney\Spritesheet\blueSheet.xml" />
+     <None Include="Assets\Assets\freegui\png\README.txt" />
      <None Include="Assets\Assets\Kenney\Spritesheet\greenSheet.xml" />
      <None Include="Assets\Firebase\m2repository\com\google\firebase\firebase-auth-unity\maven-metadata.xml" />
  <Reference Include="Unity.Timeline.Editor">

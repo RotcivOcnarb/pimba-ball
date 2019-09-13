@@ -31,6 +31,8 @@ public class ObstacleBall : MonoBehaviour
     Color green;
     Color red;
 
+    bool damaged = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -73,9 +75,10 @@ public class ObstacleBall : MonoBehaviour
         rounds++;
         if(rounds == 6)
         {
-            float dmg = 10 * GlobalVars.getPlayerProfile().GetPlayerDeffense();
-            Debug.Log("Player damage received: " + dmg);
-            pimbaBall.Damage(dmg);
+            if(!damaged){
+                pimbaBall.Damage();
+                damaged = true;
+            }
         }
     }
 

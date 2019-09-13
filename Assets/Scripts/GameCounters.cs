@@ -29,8 +29,8 @@ public class GameCounters : MonoBehaviour
     void Update()
     {
         lifeTween += (pimbaBall.life - lifeTween) / 5f;
-        lifeBar.rectTransform.offsetMax = new Vector2(-initialWidth * (1-(lifeTween / pimbaBall.maxLife)), 0);
-        lifeCounter.text = (int)((lifeTween / pimbaBall.maxLife) * 100) + "%";
+        //lifeBar.rectTransform.offsetMax = new Vector2(-initialWidth * (1-(lifeTween / pimbaBall.maxLife)), 0);
+        //lifeCounter.text = (int)((lifeTween / pimbaBall.maxLife) * 100) + "%";
         coinCounter.text = "Coins: " + GlobalVars.getPlayerProfile().coins;
         scoreCounter.text = "Score: " + manager.score;
         stageCounter.text = "Stage " + GlobalVars.getPlayerProfile().stage;

@@ -42,12 +42,12 @@ public class PlayerProfile : SaveGame
         return 1;
     }
 
-    public float GetPlayerDeffense(){
+    public int GetPlayerHealth(){
         if (upgrades.ContainsKey("armadura")) {
             int cont = upgrades["armadura"];
-            return (1 / (float)(cont+5f)) * 5f;
+            return cont + 3;
         }
-        return 1;
+        return 3;
     
     }
 
@@ -64,7 +64,7 @@ public class PlayerProfile : SaveGame
 
         if (upgrades.ContainsKey("bomba")) {
             int cont = upgrades["bomba"];
-            ret.x = Mathf.Min(cont/20f, .5f);
+            ret.x = Mathf.Min(cont/20f, .3f);
             ret.y = (int) (cont + 1);
         }
 
@@ -75,7 +75,7 @@ public class PlayerProfile : SaveGame
         Vector2 ret = new Vector2(0, 0);
         if (upgrades.ContainsKey("chain-reaction")) {
             int cont = upgrades["chain-reaction"];
-            ret.x = Mathf.Min(cont/20f, .5f);
+            ret.x = Mathf.Min(cont/50f, .3f);
             ret.y = (int) (cont + 1);
         }
         return ret;
