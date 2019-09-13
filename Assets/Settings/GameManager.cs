@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public PimbaBall pimbaBall;
     public ObstacleBall obstaclePrefab;
-    public Powerup[] powerups;
+    
     public RectTransform playArea;
     public GameObject pauseMenu;
     //Manager
@@ -117,20 +117,6 @@ public class GameManager : MonoBehaviour
             instanced.color.a = 1;
             instanced.obstacleSize = Random.Range(0.4f, 0.7f);
             instanced.pimbaBall = pimbaBall;
-        }
-
-        if(Random.Range(0, 100) < 10)
-        {
-            Vector3 sMin = Camera.main.ScreenToWorldPoint(new Vector3(0f, 0f, 0f));
-            Vector3 sMax = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0f));
-
-            Powerup p = powerups[(int)Random.Range(0, powerups.Length)];
-            Powerup powerup = Instantiate(p, new Vector3(
-                    Random.Range(sMin.x, sMax.x),
-                    Random.Range(sMin.y, sMax.y),
-                    0
-                ), new Quaternion());
-            powerup.pimbaBall = pimbaBall;
         }
 
         level++;

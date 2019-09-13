@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class LightningFadeOut : MonoBehaviour
 {
+    float timer = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -13,6 +14,8 @@ public class LightningFadeOut : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        timer += Time.deltaTime;
 
         RecalculateLines(
             GetComponent<LineRenderer>().GetPosition(0),
@@ -24,7 +27,7 @@ public class LightningFadeOut : MonoBehaviour
         GetComponent<LineRenderer>().startColor = c;
         GetComponent<LineRenderer>().endColor = c;
 
-        if(c.a < 0.05f){
+        if(timer > 2){
             Destroy(gameObject);
         }
         
@@ -34,6 +37,9 @@ public class LightningFadeOut : MonoBehaviour
         LineRenderer line = GetComponent<LineRenderer>();
         float dist = (lEnd - lStart).magnitude;
         int points = (int)(dist * 5);
+        if(points < 2)
+            points = 2;
+
         Vector3[] newList = new Vector3[points];
         for(int i = 0; i < points; i ++){
             newList[i] = Vector3.Lerp(lStart, lEnd, i / (float)(points-1));

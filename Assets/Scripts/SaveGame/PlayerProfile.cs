@@ -65,7 +65,7 @@ public class PlayerProfile : SaveGame
         if (upgrades.ContainsKey("bomba")) {
             int cont = upgrades["bomba"];
             ret.x = Mathf.Min(cont/20f, .5f);
-            ret.y = (int) (cont/2f + 1);
+            ret.y = (int) (cont + 1);
         }
 
         return ret;
@@ -76,7 +76,7 @@ public class PlayerProfile : SaveGame
         if (upgrades.ContainsKey("chain-reaction")) {
             int cont = upgrades["chain-reaction"];
             ret.x = Mathf.Min(cont/20f, .5f);
-            ret.y = (int) (cont/2f + 1);
+            ret.y = (int) (cont + 1);
         }
         return ret;
     }

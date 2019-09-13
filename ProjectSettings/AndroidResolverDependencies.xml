@@ -1,5 +1,6 @@
 <dependencies>
   <packages>
+    <package>com.google.android.gms:play-services-analytics:LATEST</package>
     <package>com.google.firebase:firebase-analytics:17.1.0</package>
     <package>com.google.firebase:firebase-app-unity:6.4.0</package>
     <package>com.google.firebase:firebase-auth:19.0.0</package>
@@ -39,6 +40,8 @@
     <file>Assets/Plugins/Android/androidx.versionedparcelable.versionedparcelable-1.0.0.aar</file>
     <file>Assets/Plugins/Android/androidx.viewpager.viewpager-1.0.0.aar</file>
     <file>Assets/Plugins/Android/com.google.android.gms.play-services-ads-identifier-17.0.0.aar</file>
+    <file>Assets/Plugins/Android/com.google.android.gms.play-services-analytics-17.0.0.aar</file>
+    <file>Assets/Plugins/Android/com.google.android.gms.play-services-analytics-impl-17.0.0.aar</file>
     <file>Assets/Plugins/Android/com.google.android.gms.play-services-base-17.1.0.aar</file>
     <file>Assets/Plugins/Android/com.google.android.gms.play-services-basement-17.0.0.aar</file>
     <file>Assets/Plugins/Android/com.google.android.gms.play-services-measurement-17.1.0.aar</file>
@@ -48,6 +51,7 @@
     <file>Assets/Plugins/Android/com.google.android.gms.play-services-measurement-sdk-17.1.0.aar</file>
     <file>Assets/Plugins/Android/com.google.android.gms.play-services-measurement-sdk-api-17.1.0.aar</file>
     <file>Assets/Plugins/Android/com.google.android.gms.play-services-stats-17.0.0.aar</file>
+    <file>Assets/Plugins/Android/com.google.android.gms.play-services-tagmanager-v4-impl-17.0.0.aar</file>
     <file>Assets/Plugins/Android/com.google.android.gms.play-services-tasks-17.0.0.aar</file>
     <file>Assets/Plugins/Android/com.google.auto.value.auto-value-annotations-1.6.5.jar</file>
     <file>Assets/Plugins/Android/com.google.firebase.firebase-analytics-17.1.0.aar</file>

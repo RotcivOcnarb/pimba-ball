@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DigitalRuby.LightningBolt;
+using System.Linq;
 public class ObstacleBall : MonoBehaviour
 {
     public Color color;
@@ -120,22 +121,25 @@ public class ObstacleBall : MonoBehaviour
                 Instantiate(explosionEffect, transform.position, explosionEffect.transform.rotation);
             }
 
-            ChainReaction(this);
+            ChainReaction(this, GlobalVars.getPlayerProfile().GetChainReactionValue());
             
         }
     }
 
-    public void ChainReaction(ObstacleBall obs){
+    public void ChainReaction(ObstacleBall obs, Vector2 chain){
         //Reação em cadeia
 
-            for(int i = 0; i < 2; i ++){
-                Vector2 chain = GlobalVars.getPlayerProfile().GetChainReactionValue();
+            for(int i = 0; i < 3; i ++){
                 if(Random.Range(0, 1f) < chain.x){
 
                     //Calcula o target random
                     ObstacleBall[] list = Resources.FindObjectsOfTypeAll(typeof(ObstacleBall)) as ObstacleBall[];
+                    list = list.Select(b => b).Where(b => b.gameObject.activeInHierarchy).ToArray();
+                    
+                    if(list.Length == 1) return;
+                    
                     ObstacleBall rand_ob = list[Random.Range(0, list.Length)];
-                    while(rand_ob == obs){
+                    while(rand_ob == obs || !rand_ob.gameObject.activeInHierarchy){// impede de acertar eu mesmo
                         rand_ob = list[Random.Range(0, list.Length)];
                     }
 
@@ -149,7 +153,7 @@ public class ObstacleBall : MonoBehaviour
 
                     //Dá dano e propaga o efeito
                     rand_ob.Damage((int)chain.y);
-                    ChainReaction(rand_ob);
+                    ChainReaction(rand_ob, chain * new Vector2(.5f, 1));
 
                 }
             }
