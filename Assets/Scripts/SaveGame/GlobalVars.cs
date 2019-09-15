@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Firebase;
+using Firebase.Database;
+using Firebase.Unity.Editor;
 
 public class GlobalVars : MonoBehaviour
 {
@@ -20,6 +23,46 @@ public class GlobalVars : MonoBehaviour
             Debug.Log(playerProfile);
         }
     }
+
+    public static void LoadShop(){
+        if(shopCache == null){
+            FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://pimba-ball.firebaseio.com/");
+            DatabaseReference reference = FirebaseDatabase.DefaultInstance.GetReference("flamelink");
+
+            //LÊ O SHOP DO FIREBASE
+            reference.GetValueAsync().ContinueWith((System.Threading.Tasks.Task<DataSnapshot> task) =>
+            {
+                if (task.IsFaulted)
+                {
+                    Debug.LogError(task.Exception);
+                }
+                else if (task.IsCompleted)
+                {
+                    DataSnapshot snap = task.Result;
+                    Dictionary<string, object> myDict = (Dictionary<string, object>)snap.Value;
+
+                    shopCache = new ShopStructure(myDict, false);
+                }
+            });
+        }
+    }
+
+    public static void LoadImageFromStorage(string URL, System.Action<byte[]> resultTask)
+    {
+        Firebase.Storage.StorageReference storageReference =
+        Firebase.Storage.FirebaseStorage.DefaultInstance.GetReferenceFromUrl(URL);
+
+        storageReference.GetBytesAsync(1024 * 1024).
+         ContinueWith((System.Threading.Tasks.Task<byte[]> task) => {
+        if (task.IsFaulted || task.IsCanceled) {
+            Debug.Log(task.Exception.ToString());
+        }
+        else {
+            resultTask(task.Result);
+        }
+    });
+    }
+
 
     public static Dictionary<string, Sprite> GetShopImagesCache()
     {

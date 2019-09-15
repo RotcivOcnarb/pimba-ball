@@ -13,13 +13,14 @@ public class ShopItem
     public float ratio;
     public int limit;
     public string imageURL;
+    public string description;
 
     public ShopItem()
     {
 
     }
 
-    public ShopItem(string displayName, string id, int initialCost, ShopItemUI.ItemProgression progression, float ratio, int limit, string imageURL)
+    public ShopItem(string displayName, string id, int initialCost, ShopItemUI.ItemProgression progression, float ratio, int limit, string imageURL, string description)
     {
         this.displayName = displayName;
         this.id = id;
@@ -28,6 +29,7 @@ public class ShopItem
         this.ratio = ratio;
         this.limit = limit;
         this.imageURL = imageURL;
+        this.description = description;
     }
 
     public int GetCurrentCost(){

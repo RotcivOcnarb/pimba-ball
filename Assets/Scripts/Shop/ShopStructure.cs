@@ -80,7 +80,8 @@ public class ShopStructure
                 (ShopItemUI.ItemProgression)int.Parse((string)itemDict["progression"]),
                 ToFloat(itemDict["ratio"]),
                 ToInt(itemDict["limite"]),
-                imageURL
+                imageURL,
+                (string)itemDict["description"]
                 );
 
             lists[listID].addShopItem(item);
@@ -108,6 +109,7 @@ public class ShopStructure
                 float ratio = ToFloat(item["ratio"]);
                 int limit = ToInt(item["limit"]);
                 string imageURL = (string)item["imageURL"];
+                string description = (string)item["description"];
 
                 ShopItem si = new ShopItem(
                         displayName,
@@ -116,7 +118,8 @@ public class ShopStructure
                         progression,
                         ratio,
                         limit,
-                        imageURL
+                        imageURL,
+                        description
                         );
                 sil.addShopItem(si);
             }
