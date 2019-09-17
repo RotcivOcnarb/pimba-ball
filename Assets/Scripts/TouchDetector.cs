@@ -23,6 +23,7 @@ public class TouchDetector : MonoBehaviour
 
     void TouchBegin(Vector2 position)
     {
+        Debug.Log("Begin touch");
         startPoint = Camera.main.ScreenToWorldPoint(position);
         endPoint = Camera.main.ScreenToWorldPoint(position);
         touching = true;
@@ -30,11 +31,13 @@ public class TouchDetector : MonoBehaviour
 
     void TouchMove(Vector2 position)
     {
+        Debug.Log("Touch move");
         endPoint = Camera.main.ScreenToWorldPoint(position);
     }
 
     void TouchEnd()
     {
+        Debug.Log("Touch end");
         if((startPoint - endPoint).magnitude < 0.1) return;
         //Dispara a bolinha
         touching = false;

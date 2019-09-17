@@ -59,27 +59,8 @@ public class ShopItemUI : MonoBehaviour
     }
 
     public void ButtonClick(){
-
-        //TODO:
-
-        //Cria o popup em cima desse canvas
-                    //Aparecer um popup "Deseja comprar este item? SIM, NAO"
-        GameObject popup = Instantiate(confirmPopup);
-
-        popup.transform.SetParent(canvas.transform, false);
-        RectTransform rect = popup.GetComponent<RectTransform>();
-        popup.GetComponent<ShopConfirmPopup>().item = item;
-        popup.GetComponent<ShopConfirmPopup>().image = imageUI.sprite;
-
-        rect.anchorMin = new Vector2(0, 0f);
-        rect.anchorMax = new Vector2(1f, 1f);
-        rect.offsetMax = new Vector2(0, 0);
-        rect.offsetMin = new Vector2(0, 0);
+        confirmPopup.GetComponent<Dialog>().OpenDialog();
         
-        Canvas canvasPop = popup.GetComponent<Canvas>();
-        canvasPop.overrideSorting = true;
-        canvasPop.sortingOrder = 10;
-
     }
 
     public void LoadImageFromStorage()

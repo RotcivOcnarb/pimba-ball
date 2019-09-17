@@ -13,18 +13,36 @@ public class PimbaBall : MonoBehaviour
     public ArrayList powerups;
     bool dead = false;
 
+    List<Vector3> positionHistory;
+
+    LineRenderer trail;
     // Start is called before the first frame update
     void Start()
     {
+        positionHistory = new List<Vector3>();
         body = GetComponent<Rigidbody2D>();
         life = GlobalVars.getPlayerProfile().GetPlayerHealth();
         powerups = new ArrayList();
+        trail = GetComponent<LineRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        positionHistory.Insert(0, transform.position);
+        while(positionHistory.Count > 20){
+            positionHistory.RemoveAt(positionHistory.Count -1);
+        }
+
+        trail.positionCount = positionHistory.Count;
+        trail.SetPositions(positionHistory.ToArray());
+        
         body.drag = GlobalVars.getPlayerProfile().GetLinearDampingUpgrade();
+
+        if(body.velocity.magnitude > 0){
+            body.rotation = Mathf.Rad2Deg * Mathf.Atan2(body.velocity.normalized.y, body.velocity.normalized.x);
+        }
     }
 
     public void ResetSpeed(){

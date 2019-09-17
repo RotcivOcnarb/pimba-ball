@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class OptionsButtonClicks : MonoBehaviour
 {
-    public GameObject popupConfirm;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,20 +16,9 @@ public class OptionsButtonClicks : MonoBehaviour
         
     }
 
-    public void DeleteSaveDataButton()
-    {
-        popupConfirm.SetActive(true);
-    }
-
     public void DeleteSaveConfirm()
     {
         GlobalVars.DeleteSaveGame();
-        popupConfirm.SetActive(false);
-    }
-
-    public void DeleteSaveDeny()
-    {
-        popupConfirm.SetActive(false);
     }
 
     public void GoBack()

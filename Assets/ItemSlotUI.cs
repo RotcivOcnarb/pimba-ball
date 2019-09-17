@@ -15,6 +15,7 @@ public class ItemSlotUI : MonoBehaviour
     public Sprite icon;
     public string displayName;
     public string description;
+    public bool unlocked = true;
 
     public ShopItem item;
 
@@ -26,6 +27,7 @@ public class ItemSlotUI : MonoBehaviour
     public Image itemImage;
     public Text nameText;
     public Text descriptionText;
+    public Image lockImage;
 
     [Header("Manager")]
     public ShopManager manager;
@@ -44,6 +46,15 @@ public class ItemSlotUI : MonoBehaviour
         itemImage.sprite = icon;
         nameText.text = displayName;
         descriptionText.text = description;
+
+        unlocked = item.GetCurrentCost() < GlobalVars.getPlayerProfile().coins;
+
+        if(unlocked){
+            lockImage.color = new Color(1, 1, 1, 0);
+        }
+        else{
+            lockImage.color = new Color(1, 1, 1, 0.5f);
+        }
     }
 
     public void Populate(ShopItem item, int purchases, int cost, Sprite icon){
@@ -58,6 +69,15 @@ public class ItemSlotUI : MonoBehaviour
     }
 
     public void OpenPurchaseMenu(){
-        manager.ShowConfirmWindow(this.icon, item);
+        if(unlocked)
+        manager.ShowConfirmWindow(this.icon, item, this);
+    }
+
+    public void Refresh(int purchases, int cost){
+        this.purchases = purchases;
+        this.cost = cost;
+
+        limitText.text = purchases + "/" + limit;
+        costText.text = "" + cost;
     }
 }

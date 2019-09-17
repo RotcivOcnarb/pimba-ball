@@ -219,6 +219,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   confirmWindow: {fileID: 706479766}
   confirmImage: {fileID: 1011611856}
+  coinsText: {fileID: 169424295}
 --- !u!1 &169424293
 GameObject:
   m_ObjectHideFlags: 0
@@ -911,13 +912,14 @@ GameObject:
   - component: {fileID: 706479769}
   - component: {fileID: 706479768}
   - component: {fileID: 706479767}
+  - component: {fileID: 706479770}
   m_Layer: 5
   m_Name: ConfirmPurchase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &706479767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -976,6 +978,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &706479770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 706479766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75e693f069b3b3545b1e4dc1036d3ac4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &746623608
 GameObject:
   m_ObjectHideFlags: 0
@@ -1917,7 +1931,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 1000}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 627.8, y: 559.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1664753398

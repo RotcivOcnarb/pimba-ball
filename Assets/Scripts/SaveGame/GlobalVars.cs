@@ -4,6 +4,7 @@ using UnityEngine;
 using Firebase;
 using Firebase.Database;
 using Firebase.Unity.Editor;
+using System.Threading.Tasks;
 
 public class GlobalVars : MonoBehaviour
 {
@@ -24,36 +25,54 @@ public class GlobalVars : MonoBehaviour
         }
     }
 
-    public static void LoadShop(){
-        if(shopCache == null){
-            FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://pimba-ball.firebaseio.com/");
-            DatabaseReference reference = FirebaseDatabase.DefaultInstance.GetReference("flamelink");
+    public static void LoadShop(ShopItemPopulator populator){
+        if(shopCache == null || !shopCache.updated){
 
-            //LÊ O SHOP DO FIREBASE
-            reference.GetValueAsync().ContinueWith((System.Threading.Tasks.Task<DataSnapshot> task) =>
-            {
-                if (task.IsFaulted)
-                {
-                    Debug.LogError(task.Exception);
+            if(Application.internetReachability == NetworkReachability.NotReachable){
+                
+                //Não tem internet, pega do arquivo de cache;
+                if(SaveGameSystem.DoesSaveGameExist("shop")){
+                    shopCache = (ShopStructure)SaveGameSystem.LoadGame("shop");
+                    shopCache.updated = false;
                 }
-                else if (task.IsCompleted)
-                {
-                    DataSnapshot snap = task.Result;
-                    Dictionary<string, object> myDict = (Dictionary<string, object>)snap.Value;
 
-                    shopCache = new ShopStructure(myDict, false);
-                }
-            });
+            }
+            else{
+                //Tem internet
+                FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://pimba-ball.firebaseio.com/");
+                DatabaseReference reference = FirebaseDatabase.DefaultInstance.GetReference("flamelink");
+
+                //LÊ O SHOP DO FIREBASE
+                Task tkk = reference.GetValueAsync().ContinueWith((Task<DataSnapshot> task) =>
+                {
+                    if (task.IsFaulted){
+                        Debug.LogError(task.Exception);
+                    }
+                    else if (task.IsCompleted){
+                        DataSnapshot snap = task.Result;
+                        Dictionary<string, object> myDict = (Dictionary<string, object>)snap.Value;
+
+                        shopCache = new ShopStructure(myDict, false, true);
+
+                        populator.QueueToExecute(() => {
+                            bool res = SaveGameSystem.SaveGame(shopCache, "shop");
+                            Debug.Log("Loja carregada, tentei salvar no cache, funcionou? " + res);
+                        });
+                    }
+                });
+            }
         }
     }
 
     public static void LoadImageFromStorage(string URL, System.Action<byte[]> resultTask)
     {
+        if(Application.internetReachability == NetworkReachability.NotReachable) return;
+        
         Firebase.Storage.StorageReference storageReference =
         Firebase.Storage.FirebaseStorage.DefaultInstance.GetReferenceFromUrl(URL);
 
         storageReference.GetBytesAsync(1024 * 1024).
-         ContinueWith((System.Threading.Tasks.Task<byte[]> task) => {
+        ContinueWith((System.Threading.Tasks.Task<byte[]> task) => {
         if (task.IsFaulted || task.IsCanceled) {
             Debug.Log(task.Exception.ToString());
         }

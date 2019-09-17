@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        Time.timeScale = 1;
         score = 0;
         body = pimbaBall.GetComponent<Rigidbody2D>();
          SpawnEnemies();

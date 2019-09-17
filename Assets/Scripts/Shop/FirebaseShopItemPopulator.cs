@@ -53,7 +53,7 @@ public class FirebaseShopItemPopulator : MonoBehaviour
                 DataSnapshot snap = task.Result;
                 Dictionary<string, object> myDict = (Dictionary<string, object>)snap.Value;
 
-                GlobalVars.shopCache = new ShopStructure(myDict, false);
+                GlobalVars.shopCache = new ShopStructure(myDict, false, true);
             }
         });
     }

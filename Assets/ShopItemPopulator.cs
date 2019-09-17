@@ -17,7 +17,7 @@ public class ShopItemPopulator : MonoBehaviour
     {  
         actions = new Queue();
         //Procura o shop
-        GlobalVars.LoadShop();
+        GlobalVars.LoadShop(this);
     }
 
     public void CreateUI(){

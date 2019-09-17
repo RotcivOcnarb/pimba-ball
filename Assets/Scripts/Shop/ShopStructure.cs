@@ -4,10 +4,12 @@ using UnityEngine;
 using System;
 
 [Serializable]
-public class ShopStructure
+public class ShopStructure : SaveGame
 {
 
+    [SerializeField]
     public SortedList<string, ShopItemList> lists;
+    public bool updated;
 
     public int ToInt(object obj)
     {
@@ -24,10 +26,10 @@ public class ShopStructure
         return long.Parse(obj.ToString());
     }
 
-    public ShopStructure(Dictionary<string, object> data, bool legacy)
+    public ShopStructure(Dictionary<string, object> data, bool legacy, bool updated)
     {
         lists = new SortedList<string, ShopItemList>();
-
+        this.updated = updated;
         if (legacy)
             LegacyLoad(data);
         else

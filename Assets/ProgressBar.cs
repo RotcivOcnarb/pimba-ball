@@ -10,6 +10,9 @@ public class ProgressBar : MonoBehaviour
     public int value;
     public GameObject slotPrefab;
     public HorizontalLayoutGroup grid;
+
+    public Sprite spriteOn;
+    public Sprite spriteOff;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,12 +41,10 @@ public class ProgressBar : MonoBehaviour
         //Atualiza os que já tão lá
         for(int i = 0; i < grid.transform.childCount; i ++){
             GameObject slot = grid.transform.GetChild(i).gameObject;
-            Color c = slot.GetComponent<Image>().color;
             if(i >= value)
-                c.a = 0;
+                slot.GetComponent<Image>().sprite = spriteOff;
             else
-                c.a = 1;
-            slot.GetComponent<Image>().color = c;
+                slot.GetComponent<Image>().sprite = spriteOn;
         }
 
         
