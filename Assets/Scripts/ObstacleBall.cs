@@ -68,6 +68,8 @@ public class ObstacleBall : MonoBehaviour
     public void Kill()
     {
         Destroy(gameObject);
+
+        
     }
 
     public void Persist()
@@ -76,7 +78,15 @@ public class ObstacleBall : MonoBehaviour
         if(rounds == 6)
         {
             if(!damaged){
-                pimbaBall.Damage();
+                //TODO: Cria o objeto DamageEffect;
+                GameObject deff = Instantiate(manager.damageEffectPrefab);
+                deff.transform.position = transform.position;
+                DamageEffect comp = deff.GetComponent<DamageEffect>();
+                comp.velocity = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
+                comp.velocity.Normalize();
+                comp.manager = manager;
+
+                //pimbaBall.Damage();
                 damaged = true;
             }
         }
@@ -142,8 +152,13 @@ public class ObstacleBall : MonoBehaviour
                     if(list.Length == 1) return;
                     
                     ObstacleBall rand_ob = list[Random.Range(0, list.Length)];
-                    while(rand_ob == obs || !rand_ob.gameObject.activeInHierarchy){// impede de acertar eu mesmo
+                    float dist = (rand_ob.transform.position - obs.transform.position).magnitude;
+                    int tries = 0;
+                    while(rand_ob == obs || !rand_ob.gameObject.activeInHierarchy || dist > 3){// impede de acertar eu mesmo
                         rand_ob = list[Random.Range(0, list.Length)];
+                        dist = (rand_ob.transform.position - obs.transform.position).magnitude;
+                        tries++;
+                        if(tries > 10) return;
                     }
 
                     //Cria o objeto de linha

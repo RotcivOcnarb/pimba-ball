@@ -61,6 +61,11 @@ public class PimbaBall : MonoBehaviour
         {
             if(!dead){
                 dead = true;
+
+                foreach(DamageEffect de in Transform.FindObjectsOfType(typeof(DamageEffect))){
+                    Destroy(de.gameObject);
+                }
+
                 manager.ShowGameOverScreen();
             }
         }

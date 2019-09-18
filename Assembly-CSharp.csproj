@@ -62,6 +62,7 @@
      <Compile Include="Assets\Assets\Placeholders\DailyRewards\Scripts\DailyRewardsCore.cs" />
      <Compile Include="Assets\Assets\Placeholders\DailyRewards\Scripts\IntegrationDailyRewards.cs" />
      <Compile Include="Assets\Assets\Placeholders\DailyRewards\Scripts\Reward.cs" />
+     <Compile Include="Assets\DamageEffect.cs" />
      <Compile Include="Assets\Dialog.cs" />
      <Compile Include="Assets\DropToCenterY.cs" />
      <Compile Include="Assets\FillBar.cs" />

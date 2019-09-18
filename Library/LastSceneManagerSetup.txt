@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/Remake/Shop.unity
+- path: Assets/Scenes/Remake/Options.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0

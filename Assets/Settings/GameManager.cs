@@ -11,12 +11,19 @@ public class GameManager : MonoBehaviour
     public RectTransform playArea;
     public GameObject pauseMenu;
     public GameObject winMenu;
+    public Camera mainCamera;
+    public Image damageUI;
+    public GameObject damageEffectPrefab;
+    public Animator screenClearAnimation;
+    public WinWindowScreen winScreen;
+    bool clearScreenShowed = false;
     //Manager
     public ButtonFastForward button;
     bool obstacleSpawned = true;
     public int score;
     public int level = 0;
     Rigidbody2D body;
+    public GameObject damageTarget;
 
     //Interface
     public FillBar levelBar;
@@ -48,12 +55,25 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if(Transform.FindObjectsOfType(typeof(ObstacleBall)).Length == 0 && !clearScreenShowed){
+            ScreenClearAnimation();
+            clearScreenShowed = true;
+        }
+
         levelBar.percentage += ((level / 10f) * 100 - levelBar.percentage)/5f;
         healthBar.maxValue = GlobalVars.getPlayerProfile().GetPlayerHealth();
         healthBar.value = (int)pimbaBall.life;
         scoreText.text = "" + score;
         stageText.text = "Stage " + GlobalVars.getPlayerProfile().stage;
 
+        Vector3 campos = mainCamera.transform.position;
+        campos += (new Vector3(0, 0, -10) - campos) / 5f;
+        mainCamera.transform.position = campos;
+
+        Color c = damageUI.color;
+        c.a += (0 - c.a) / 5f;
+        damageUI.color = c;
 
         // The ball has finished moving, next round
         if (body.velocity.magnitude < 0.1 && obstacleSpawned == false)
@@ -65,11 +85,19 @@ public class GameManager : MonoBehaviour
             pimbaBall.ResetPowerups();
             pimbaBall.ResetSpeed();
             ObstacleBall[] balls = FindObjectsOfType<ObstacleBall>();
+            clearScreenShowed = false;
 
             foreach (ObstacleBall ball in balls)
                 ball.Persist();
 
         }
+    }
+
+    public void ScreenClearAnimation(){
+        screenClearAnimation.SetTrigger("ScreenClear");
+        winScreen.addLine("Cleared Screen: +" + 100 * GlobalVars.getPlayerProfile().stage +" Coins", () => {
+            GlobalVars.getPlayerProfile().coins += 100 * GlobalVars.getPlayerProfile().stage;
+        });
     }
 
     float lastTimeScale = 0;
@@ -110,8 +138,14 @@ public class GameManager : MonoBehaviour
         int lv = level + (GlobalVars.getPlayerProfile().stage-1)*10;
         int quantity = Mathf.Max(Random.Range(lv/3 - 1, lv/3 + 2), 1);
 
+        int total = Transform.FindObjectsOfType(typeof(ObstacleBall)).Length;
+
         for(int i = 0; i < quantity; i++)
         {
+            if(total > 100)
+                break;
+            
+
             int hits = Mathf.Max(Random.Range(lv/3 - 1, lv/3 + 2), 1);
 
             Vector3[] corners = new Vector3[4];
@@ -143,6 +177,8 @@ public class GameManager : MonoBehaviour
             instanced.color.a = 1;
             instanced.obstacleSize = Random.Range(0.4f, 0.7f);
             instanced.pimbaBall = pimbaBall;
+
+            total++;
         }
 
         level++;

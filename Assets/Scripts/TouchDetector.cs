@@ -15,6 +15,8 @@ public class TouchDetector : MonoBehaviour
     Rigidbody2D body;
     public GameManager gameManager;
 
+    bool hasDamageOnField;
+
     void Start()
     {
         lineRenderer = GetComponent<LineRenderer>();
@@ -23,30 +25,36 @@ public class TouchDetector : MonoBehaviour
 
     void TouchBegin(Vector2 position)
     {
-        Debug.Log("Begin touch");
-        startPoint = Camera.main.ScreenToWorldPoint(position);
-        endPoint = Camera.main.ScreenToWorldPoint(position);
-        touching = true;
+        if(!hasDamageOnField){
+            startPoint = Camera.main.ScreenToWorldPoint(position);
+            endPoint = Camera.main.ScreenToWorldPoint(position);
+            touching = true;
+        }
     }
 
     void TouchMove(Vector2 position)
     {
-        Debug.Log("Touch move");
-        endPoint = Camera.main.ScreenToWorldPoint(position);
+        if(!hasDamageOnField && touching){
+            endPoint = Camera.main.ScreenToWorldPoint(position);
+        }
     }
 
     void TouchEnd()
     {
-        Debug.Log("Touch end");
-        if((startPoint - endPoint).magnitude < 0.1) return;
-        //Dispara a bolinha
-        touching = false;
-        gameManager.TouchEnded((startPoint - endPoint));
+        if(!hasDamageOnField && touching){
+            if((startPoint - endPoint).magnitude < 0.1) return;
+            //Dispara a bolinha
+            touching = false;
+            gameManager.TouchEnded((startPoint - endPoint));
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        hasDamageOnField = Transform.FindObjectsOfType(typeof(DamageEffect)).Length > 0;
+
         if (Time.timeScale != 0) {
             //Draws the LineRenderer only if the ball is stopped and the player is dragging
             if (touching && body.velocity.magnitude < 0.1) {
